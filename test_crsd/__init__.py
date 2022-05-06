@@ -73,9 +73,7 @@ def set_trees_group_round(player):
     else:     
         participant.trees_p2 = random.choice(Constants.sustainable_decisions) # Always sustainable player, start with 10
         participant.trees_p4 = random.choice(Constants.not_sustainable_decisions) # Always selfish player, start with 20
-        if participant.forest < 61: 
-            participant.trees_p3 = 10 
-        elif participant.trees_player_round == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10: 
+        if participant.trees_player_round == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10: 
             participant.trees_p3 = 10
         elif participant.trees_player_round == 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19:
             participant.trees_p3 = 15
@@ -567,7 +565,8 @@ class RoundFeedback(Page):
     @staticmethod
     def is_displayed(player):
         participant = player.participant
-        return participant.forest > 0
+        return participant.forest > 0 and player.round_number != 10
+    
 
     @staticmethod
     def before_next_page(player, timeout_happened):
