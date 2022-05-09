@@ -70,7 +70,7 @@ class Player(BasePlayer):
         [2, 'lost in round 5'],
         [3, 'lost in round 3'],
         ],
-        label="Q6:Imagine you have removed the following number of trees: 10 trees in round 1, 5 trees in round 2, 12 trees in round 3, 10 trees in round 4, 20 trees in round 5. Do you still have the eco-label or if not, in which round did you lose it?",
+        label="Q6: Imagine you have removed the following number of trees: 10 trees in round 1, 5 trees in round 2, 12 trees in round 3, 10 trees in round 4, 20 trees in round 5. Do you still have the eco-label or if not, in which round did you lose it?",
         )
     trees_player_total = models.IntegerField(min=0, max=40)
     trees_group_total = models.IntegerField()
@@ -350,11 +350,6 @@ class ExampleEcoIT(Page):
 class MouselabExplanation(Page):
     form_model = 'player'
     form_fields = ['sButtonClick', 'sTimeClick']
-
-    @staticmethod
-    def is_displayed(player):
-        participant = player.participant
-        return participant.treatment == 'SECO_I_T' or participant.treatment == 'SECO_I_P' or participant.treatment == 'SECO_G_T' or participant.treatment == 'SECO_G_P' 
 
     @staticmethod
     def error_message(player, values):
