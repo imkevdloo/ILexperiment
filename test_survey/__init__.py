@@ -63,7 +63,6 @@ class Player(BasePlayer):
         [5, 'Very low']
         ],
         label="My knowledge about the environment is:",
-        widget=widgets.RadioSelect
         )
     deforestation_knowledge = models.IntegerField(
         choices=[
@@ -74,7 +73,6 @@ class Player(BasePlayer):
             [5, 'Very low']
         ],
         label="My knowledge about deforestation is:",
-        widget=widgets.RadioSelect
     )
     environment_importance = models.IntegerField(
         choices=[
@@ -85,7 +83,6 @@ class Player(BasePlayer):
         [5, 'Not important']
         ],
         label="I find the environment:",
-        widget=widgets.RadioSelect
         )
     environment_behavior = models.IntegerField(
         choices=[
@@ -96,8 +93,7 @@ class Player(BasePlayer):
             [5, 'Always']
             ],
         label="My daily-life behaviour is environmently friendly: ",
-        widget=widgets.RadioSelect
-    )
+            )
     happy_past = models.IntegerField(
         choices=[
         [1, 'Very slightly or not at all'],
@@ -107,7 +103,7 @@ class Player(BasePlayer):
         [5, 'Extremely']
         ],
         label="Happy",
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelectHorizontal
       )
 
     excited_past = models.IntegerField(
@@ -119,7 +115,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Excited",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     enthusiastic_past = models.IntegerField(
         choices=[
@@ -130,7 +126,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Enthusiastic",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     proud_past = models.IntegerField(
         choices=[
@@ -141,7 +137,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Proud",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     inspired_past = models.IntegerField(
         choices=[
@@ -152,7 +148,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Inspired",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     sad_past = models.IntegerField(
         choices=[
@@ -163,7 +159,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Sad",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     afraid_past = models.IntegerField(
         choices=[
@@ -174,7 +170,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Afraid",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     angry_past = models.IntegerField(
         choices=[
@@ -185,7 +181,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Angry",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     ashamed_past = models.IntegerField(
         choices=[
@@ -196,7 +192,7 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Ashamed",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
     anxious_past = models.IntegerField(
         choices=[
@@ -207,118 +203,31 @@ class Player(BasePlayer):
             [5, 'Extremely']
         ],
         label="Anxious",
-    widget=widgets.RadioSelect
+    widget=widgets.RadioSelectHorizontal
     )
-    happy_during = models.IntegerField(
-        choices=[
-        [1, 'Very slightly or not at all'],
-        [2, 'A little'],
-        [3, 'Moderately'],
-        [4, 'Quite a bit'],
-        [5, 'Extremely']
-        ],
-        label="Happy",
-       widget=widgets.RadioSelect
-        )
-    excited_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
+
+    def make_field(label):
+        return models.IntegerField(
+        choices=[[1, 'Very slightly or not at all'],
             [2, 'A little'],
             [3, 'Moderately'],
             [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Excited",
-    widget=widgets.RadioSelect
+            [5, 'Extremely']],
+        label=label,
+        widget=widgets.RadioSelectHorizontal,
     )
-    enthusiastic_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Enthusiastic",
-    widget=widgets.RadioSelect
-    )
-    proud_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Proud",
-    widget=widgets.RadioSelect
-    )
-    inspired_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or ot at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Inspired",
-    widget=widgets.RadioSelect
-    )
-    sad_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Sad",
-    widget=widgets.RadioSelect
-    )
-    afraid_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Afraid",
-   widget=widgets.RadioSelect
-    )
-    angry_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Angry",
-    widget=widgets.RadioSelect
-    )
-    ashamed_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Ashamed",
-    widget=widgets.RadioSelect
-    )
-    anxious_during = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Anxious",
-    widget=widgets.RadioSelect
-    )
+
+    happy_during = make_field('Happy')
+    excited_during = make_field('Excited')
+    enthusiastic_during = make_field('Enthusiastic')
+    proud_during = make_field('Proud')
+    inspired_during = make_field('Inspired')
+    sad_during = make_field('Sad')
+    afraid_during = make_field('Afraid')
+    angry_during = make_field('Angry')
+    ashamed_during = make_field('Ashamed')    
+    anxious_during = make_field('Anxious')
+
     comments = models.StringField(
         label="If you have any comments on the experiment, you can leave them here:", blank=True)
     decision_info = models.IntegerField(
@@ -371,6 +280,13 @@ class Player(BasePlayer):
         ],
         label="Where would you place yourself in the political spectrum?",
      )
+
+
+
+
+
+
+    
 
 
 # PAGES

@@ -5,9 +5,25 @@
 
     <p>
         The following list consists of words that describe different feelings and emotions. Read each item and indicate to what extent you have felt this way <strong> while playing the game </strong>.
-    </p>
+       
 
-    {{ formfields }}
+
+            <table class="table">
+                <tr>
+                {{ for field in form }}
+                    <tr>
+                        <th>{{ field.label }}</th>
+                        {{ for choice in field }}
+                         <td>{{ choice }}</td>
+                        {{ endfor }}
+                    </tr>
+                {{ endfor }}
+            </table>
+
+      
+    </p>
+    <br><br>
     {{ next_button }}
+
 
 {{ endblock }}

@@ -81,6 +81,9 @@ class Player(BasePlayer):
     eco_status_p3 = models.StringField()
     eco_status_p4 = models.StringField()
     practice_round = models.IntegerField(label="How many trees do you want to cut down?")
+    sButtonClick            = models.StringField(blank=True)
+    sTimeClick              = models.StringField(blank=True) 
+
 
 def creating_session(subsession):
     if subsession.round_number == 1:
@@ -88,7 +91,6 @@ def creating_session(subsession):
             participant = player.participant
             participant.treatment = random.choice(Constants.treatments) #dividing treatments
             print(participant.treatment)
-
 
 
 
@@ -345,8 +347,29 @@ class ExampleEcoIT(Page):
         if values['practice_round'] not in Constants.removal_decisions:
             return 'Please fill in a number in between 0 and 20'
 
+class MouselabExplanation(Page):
+    form_model = 'player'
+    form_fields = ['sButtonClick', 'sTimeClick']
+
+    @staticmethod
+    def is_displayed(player):
+        participant = player.participant
+        return participant.treatment == 'SECO_I_T' or participant.treatment == 'SECO_I_P' or participant.treatment == 'SECO_G_T' or participant.treatment == 'SECO_G_P' 
+
+    @staticmethod
+    def error_message(player, values):
+        if len(values['sButtonClick']) == 0:
+            return 'Please hover your mouse over the block to reveal information.'
+        
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        participant = player.participant
+        player.treatment = participant.treatment
+        participant.sButtonClick = player.sButtonClick
+        participant.sTimeClick = player.sTimeClick
+
 class StartExperiment(Page):
     pass
 
 
-page_sequence = [Welcome, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, StartExperiment]
+page_sequence = [Welcome, ControlQuestion, Exit, InstructionsSECO, InstructionsControl, ExampleScreen, ExampleControlGP, ExampleControlGT,ExampleControlIP, ExampleControlIT, ExampleEcoGP, ExampleEcoGT, ExampleEcoIP, ExampleEcoIT, MouselabExplanation, StartExperiment]

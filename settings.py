@@ -39,8 +39,8 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ADMIN_USERNAME = 'CPRD_Experiment'
-# for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = 'UVA_Experiment'
+
+OTREE_ADMIN_PASSWORD = 'UVA_Experiment'
 
 DEMO_PAGE_INTRO_HTML = """ """
 
