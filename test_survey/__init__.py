@@ -94,118 +94,7 @@ class Player(BasePlayer):
             ],
         label="My daily-life behaviour is environmently friendly: ",
             )
-    happy_past = models.IntegerField(
-        choices=[
-        [1, 'Very slightly or not at all'],
-        [2, 'A little'],
-        [3, 'Moderately'],
-        [4, 'Quite a bit'],
-        [5, 'Extremely']
-        ],
-        label="Happy",
-        widget=widgets.RadioSelectHorizontal
-      )
-
-    excited_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Excited",
-    widget=widgets.RadioSelectHorizontal
-    )
-    enthusiastic_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Enthusiastic",
-    widget=widgets.RadioSelectHorizontal
-    )
-    proud_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Proud",
-    widget=widgets.RadioSelectHorizontal
-    )
-    inspired_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Inspired",
-    widget=widgets.RadioSelectHorizontal
-    )
-    sad_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Sad",
-    widget=widgets.RadioSelectHorizontal
-    )
-    afraid_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Afraid",
-    widget=widgets.RadioSelectHorizontal
-    )
-    angry_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Angry",
-    widget=widgets.RadioSelectHorizontal
-    )
-    ashamed_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Ashamed",
-    widget=widgets.RadioSelectHorizontal
-    )
-    anxious_past = models.IntegerField(
-        choices=[
-            [1, 'Very slightly or not at all'],
-            [2, 'A little'],
-            [3, 'Moderately'],
-            [4, 'Quite a bit'],
-            [5, 'Extremely']
-        ],
-        label="Anxious",
-    widget=widgets.RadioSelectHorizontal
-    )
-
+   
     def make_field(label):
         return models.IntegerField(
         choices=[[1, 'Very slightly or not at all'],
@@ -216,7 +105,17 @@ class Player(BasePlayer):
         label=label,
         widget=widgets.RadioSelectHorizontal,
     )
-
+    
+    happy_past = make_field('Happy')
+    excited_past = make_field('Excited')
+    enthusiastic_past = make_field('Enthusiastic')
+    proud_past = make_field('Proud')
+    inspired_past = make_field('Inspired')
+    sad_past = make_field('Sad')
+    afraid_past = make_field('Afraid')
+    angry_past = make_field('Angry')
+    ashamed_past = make_field('Ashamed')    
+    anxious_past = make_field('Anxious')
     happy_during = make_field('Happy')
     excited_during = make_field('Excited')
     enthusiastic_during = make_field('Enthusiastic')

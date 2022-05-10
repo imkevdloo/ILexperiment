@@ -19,6 +19,7 @@ class Constants(BaseConstants):
     not_sustainable_decisions = [15, 16, 17, 18, 19, 20] #18 vs 19
     fiftheen = [15]
     twenty = [20]
+    one = [0]
     treatments = ['SECO_I_T', 'SECO_I_P', 'SECO_G_T', 'SECO_G_P', 'Control_I_T', 'Control_I_P', 'Control_G_T', 'Control_G_P']
 
 
@@ -76,7 +77,9 @@ def set_trees_group_round(player):
     else:     
         participant.trees_p2 = random.choice(Constants.sustainable_decisions) # Always sustainable player (0, 1, 2)
         participant.trees_p4 = random.choice(Constants.not_sustainable_decisions) # Always selfish player(3, 4)
-        if participant.trees_player_round == 20:
+        if player.participant.forest < 41:
+            participant.trees_p3 = random.choice(Constants.one)
+        elif participant.trees_player_round == 20:
             participant.trees_p3 = random.choice(Constants.twenty) # Not sustainable if rest of group trees > 10
         elif participant.trees_player_round > 10:
             participant.trees_p3 = random.choice(Constants.fiftheen)
