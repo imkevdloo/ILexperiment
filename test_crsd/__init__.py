@@ -17,6 +17,8 @@ class Constants(BaseConstants):
     removal_decisions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] #extra for conditional?
     sustainable_decisions = [5, 6, 7 , 8, 9, 10]   #8 vs 9 
     not_sustainable_decisions = [15, 16, 17, 18, 19, 20] #18 vs 19
+    fiftheen = [15]
+    twenty = [20]
     treatments = ['SECO_I_T', 'SECO_I_P', 'SECO_G_T', 'SECO_G_P', 'Control_I_T', 'Control_I_P', 'Control_G_T', 'Control_G_P']
 
 
@@ -66,21 +68,20 @@ class Player(BasePlayer):
 # FUNCTIONS
 def set_trees_group_round(player):
     participant = player.participant
+    participant.trees_player_round = participant.trees_player_round
     if player.round_number == 1 :
         participant.trees_p2 = 10 
         participant.trees_p3 = 10
         participant.trees_p4 = 20
     else:     
-        participant.trees_p2 = random.choice(Constants.sustainable_decisions) # Always sustainable player, start with 10
-        participant.trees_p4 = random.choice(Constants.not_sustainable_decisions) # Always selfish player, start with 20
-        if participant.trees_player_round == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10: 
-            participant.trees_p3 = 10
-        elif participant.trees_player_round == 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18 or 19:
-            participant.trees_p3 = 15
-        elif participant.trees_player_round == 20: 
-            participant.trees_p3 = 20
+        participant.trees_p2 = random.choice(Constants.sustainable_decisions) # Always sustainable player (0, 1, 2)
+        participant.trees_p4 = random.choice(Constants.not_sustainable_decisions) # Always selfish player(3, 4)
+        if participant.trees_player_round == 20:
+            participant.trees_p3 = random.choice(Constants.twenty) # Not sustainable if rest of group trees > 10
+        elif participant.trees_player_round > 10:
+            participant.trees_p3 = random.choice(Constants.fiftheen)
         else:
-            participant.trees_p3 = 10
+            participant.trees_p3 = random.choice(Constants.sustainable_decisions) # Sustainable if rest of group trees < 10
     participant.trees_group_round = participant.trees_p2 + participant.trees_p3 + participant.trees_p4 + participant.trees_player_round
     return participant.trees_group_round
 
@@ -221,7 +222,7 @@ def set_eco_labels_total(player): #number of eco-labels in the group, DOESNT WOR
         elif (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No'):
             participant.eco_labels_total = 2
         elif (participant.eco_status == 'Yes' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'Yes' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'Yes' and participant.eco_status_p4 == 'No') or (participant.eco_status == 'No' and participant.eco_status_p2 == 'No' and participant.eco_status_p3 == 'No' and participant.eco_status_p4 == 'Yes'):
-                participant.eco_labels_total = 1
+            participant.eco_labels_total = 1
         else: 
             participant.eco_labels_total = 0
     else:
@@ -314,6 +315,7 @@ class DecisionControlGT(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+        
 
 #DecisionControlIP
 class DecisionControlIP(Page):
@@ -355,6 +357,7 @@ class DecisionControlIP(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+        
 
 #DecisionControlIT
 class DecisionControlIT(Page):
@@ -395,6 +398,7 @@ class DecisionControlIT(Page):
         player.participant.game_over = 0
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+        
 
 #DecisionEcoGP
 
@@ -437,6 +441,7 @@ class DecisionEcoGP(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+       
 
 #DecisionECOGT
 class DecisionEcoGT(Page):
@@ -477,7 +482,7 @@ class DecisionEcoGT(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-
+        
 #DecisionEcoIP
 class DecisionEcoIP(Page):
     form_model = 'player'
@@ -517,6 +522,7 @@ class DecisionEcoIP(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
+        
 
 #DecisionEcoIT
 class DecisionEcoIT(Page):
@@ -557,8 +563,8 @@ class DecisionEcoIT(Page):
         player.eco_labels_total = set_eco_labels_total(player)
         participant.sButtonClick = player.sButtonClick
         participant.sTimeClick = player.sTimeClick
-
-
+        
+        
 class RoundFeedback(Page):
     form_model = 'player'
 

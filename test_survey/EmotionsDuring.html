@@ -12,6 +12,12 @@
                 <tr>
                 {{ for field in form }}
                     <tr>
+                        <td> Very slightly or not at all </td>
+                        <td> A little </td>
+                        <td> Moderately </td>
+                        <td> Quite a bit </td>
+                        <td> Extremely </td>
+                    </tr> <tr>
                         <th>{{ field.label }}</th>
                         {{ for choice in field }}
                          <td>{{ choice }}</td>
@@ -19,8 +25,6 @@
                     </tr>
                 {{ endfor }}
             </table>
-
-      
     </p>
     <br><br>
     {{ next_button }}
